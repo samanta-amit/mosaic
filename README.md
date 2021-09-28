@@ -1,1 +1,1 @@
-# mosaic
+# mosaic: storage for serverless applications
