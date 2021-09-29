@@ -1,1 +1,1 @@
-# mosaic: storage for serverless applications
+# mosaic: enabling persistent memory for serverless applications
