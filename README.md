@@ -2,6 +2,8 @@
 
 which hdfs dfsadmin -safemode leave
 
+hdfs dfsadmin -report
+
 stop-all.sh
 
 hdfs namenode -format
