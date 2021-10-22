@@ -11,6 +11,7 @@ telnet localhost 9000
 sudo rm -rf /tmp/*
 
 hdfs dfs -df -h
+hdfs dfsadmin -report
 benchmark/partioned
 
 set hive.tez.java.opts=-XX:+PrintGCDetails -verbose:gc -XX:+PrintGCTimeStamps -XX:+UseNUMA -XX:+UseParallelGC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp/;
