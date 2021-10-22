@@ -4,6 +4,8 @@ which hdfs dfsadmin -safemode leave
 
 hdfs dfsadmin -report
 
+netstat -ntlp
+
 stop-all.sh
 
 hdfs namenode -format
