@@ -34,6 +34,8 @@ set hive.tez.java.opts=-XX:+PrintGCDetails -verbose:gc -XX:+PrintGCTimeStamps -X
 export HADOOP_OPTS="-Xmx4096m"
 
 
+
+
 <configuration>
     <property>
         <name>mapreduce.framework.name</name>
@@ -52,3 +54,37 @@ export HADOOP_OPTS="-Xmx4096m"
         <value>HADOOP_MAPRED_HOME=${HADOOP_HOME}</value>
     </property>
 </configuration>
+
+## Running TPC-DS queries with Spark
+
+
+For the Java Out-of-Memory Bug. Set the Variables at /spark/bin/spark-class
+# Set SPARK_MEM if it isn't already set since we also use it for this process
+SPARK_MEM=${SPARK_MEM:-512m}
+export SPARK_MEM
+
+# Set JAVA_OPTS to be able to load native libraries and to set heap size
+JAVA_OPTS="$OUR_JAVA_OPTS"
+JAVA_OPTS="$JAVA_OPTS -Djava.library.path=$SPARK_LIBRARY_PATH"
+JAVA_OPTS="$JAVA_OPTS -Xms$SPARK_MEM -Xmx$SPARK_MEM"
+
+https://github.com/IBM/spark-tpc-ds-performance-test/issues/32
+
+Tested with Spark 2.4.5
+
+Download Mirror: http://mirrors.myaegean.gr/apache/spark/spark-2.4.5/
+
+Building With Hive and JDBC Support
+
+./build/mvn -Pyarn -Phive -Phive-thriftserver -DskipTests clean package
+
+TPC-DS kit to generate Dataset
+
+https://github.com/gregrahn/tpcds-kit
+
+Tool for TPC-DS queries
+
+https://github.com/IBM/spark-tpc-ds-performance-test
+
+
+
