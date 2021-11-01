@@ -1,5 +1,7 @@
 # mosaic
 
+## Hadoop and Hive Instructions
+
 which hdfs dfsadmin -safemode leave
 
 hdfs dfsadmin -report
@@ -55,15 +57,17 @@ export HADOOP_OPTS="-Xmx4096m"
     </property>
 </configuration>
 
-## Running TPC-DS queries with Spark
+## Spark and TPC-DS Instructions
+
+### Running TPC-DS queries with Spark
 
 
 For the Java Out-of-Memory Bug. Set the Variables at /spark/bin/spark-class
-# Set SPARK_MEM if it isn't already set since we also use it for this process
+#### Set SPARK_MEM if it isn't already set since we also use it for this process
 SPARK_MEM=${SPARK_MEM:-512m}
 export SPARK_MEM
 
-# Set JAVA_OPTS to be able to load native libraries and to set heap size
+#### Set JAVA_OPTS to be able to load native libraries and to set heap size
 JAVA_OPTS="$OUR_JAVA_OPTS"
 JAVA_OPTS="$JAVA_OPTS -Djava.library.path=$SPARK_LIBRARY_PATH"
 JAVA_OPTS="$JAVA_OPTS -Xms$SPARK_MEM -Xmx$SPARK_MEM"
