@@ -1,5 +1,9 @@
 # mosaic
 
+## Debugging tool
+
+iotop -o -b -d 5
+
 ## Hadoop and Hive Instructions
 
 which hdfs dfsadmin -safemode leave
