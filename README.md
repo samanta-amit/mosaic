@@ -22,14 +22,14 @@ sudo rm -rf /tmp/* \
 hdfs dfs -df -h \
 hdfs dfsadmin -report \
 benchmark/partioned \
-set hive.tez.java.opts=-XX:+PrintGCDetails -verbose:gc -XX:+PrintGCTimeStamps -XX:+UseNUMA -XX:+UseParallelGC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp/; \
+set hive.tez.java.opts=-XX:+PrintGCDetails -verbose:gc -XX:+PrintGCTimeStamps -XX:+UseNUMA -XX:+UseParallelGC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp/;
 
 <property>
     <name>mapred.child.java.opts</name>
     <value>-Xmx4096m</value>
 </property>
 
-export HADOOP_OPTS="-Xmx4096m" \
+export HADOOP_OPTS="-Xmx4096m"
 
 <configuration>
     <property>
