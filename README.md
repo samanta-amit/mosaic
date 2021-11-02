@@ -10,41 +10,26 @@ echo 'READ WRITE IO ENERGY'; sudo pcm 1 -nc 2>&1 | egrep 'SKT   0'
 
 ## Hadoop and Hive Instructions
 
-which hdfs dfsadmin -safemode leave
-
-hdfs dfsadmin -report
-
-netstat -ntlp
-
-stop-all.sh
-
-hdfs namenode -format
-
-sbin/start-dfs.sh
-
-sbib/start-yarn.sh
-
-telnet localhost 9000 
-
-sudo rm -rf /tmp/*
-
-hdfs dfs -df -h
-
-hdfs dfsadmin -report
-
-benchmark/partioned
-
-set hive.tez.java.opts=-XX:+PrintGCDetails -verbose:gc -XX:+PrintGCTimeStamps -XX:+UseNUMA -XX:+UseParallelGC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp/;
+which hdfs dfsadmin -safemode leave\
+hdfs dfsadmin -report\
+netstat -ntlp\
+stop-all.sh\
+hdfs namenode -format\
+sbin/start-dfs.sh\
+sbib/start-yarn.sh\
+telnet localhost 9000\
+sudo rm -rf /tmp/* \
+hdfs dfs -df -h \
+hdfs dfsadmin -report \
+benchmark/partioned \
+set hive.tez.java.opts=-XX:+PrintGCDetails -verbose:gc -XX:+PrintGCTimeStamps -XX:+UseNUMA -XX:+UseParallelGC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp/; \
 
 <property>
     <name>mapred.child.java.opts</name>
     <value>-Xmx4096m</value>
-</property>
+</property> \
 
-export HADOOP_OPTS="-Xmx4096m"
-
-
-
+export HADOOP_OPTS="-Xmx4096m"\
 
 <configuration>
     <property>
@@ -82,20 +67,16 @@ JAVA_OPTS="$JAVA_OPTS -Xms$SPARK_MEM -Xmx$SPARK_MEM"
 
 https://github.com/IBM/spark-tpc-ds-performance-test/issues/32
 
-Tested with Spark 2.4.5
-
+Tested with Spark 2.4.5\
 Download Mirror: http://mirrors.myaegean.gr/apache/spark/spark-2.4.5/
 
-Building With Hive and JDBC Support
-
+Building With Hive and JDBC Support\
 ./build/mvn -Pyarn -Phive -Phive-thriftserver -DskipTests clean package
 
-TPC-DS kit to generate Dataset
-
+TPC-DS kit to generate Dataset\
 https://github.com/gregrahn/tpcds-kit
 
-Tool for TPC-DS queries
-
+Tool for TPC-DS queries\
 https://github.com/IBM/spark-tpc-ds-performance-test
 
 
