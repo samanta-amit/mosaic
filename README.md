@@ -27,9 +27,9 @@ set hive.tez.java.opts=-XX:+PrintGCDetails -verbose:gc -XX:+PrintGCTimeStamps -X
 <property>
     <name>mapred.child.java.opts</name>
     <value>-Xmx4096m</value>
-</property> \
+</property>
 
-export HADOOP_OPTS="-Xmx4096m"\
+export HADOOP_OPTS="-Xmx4096m" \
 
 <configuration>
     <property>
