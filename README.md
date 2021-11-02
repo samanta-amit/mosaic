@@ -5,7 +5,7 @@
 iotop -o -b -d 5\
 iostat\
 sudo debugfs -R stats /dev/sa1 | grep Lifetime\
-https://github.com/opcm/pcm\
+https://github.com/opcm/pcm \
 echo 'READ WRITE IO ENERGY'; sudo pcm 1 -nc 2>&1 | egrep 'SKT   0'
 
 ## Hadoop and Hive Instructions
@@ -78,7 +78,7 @@ export SPARK_MEM
 #### Set JAVA_OPTS to be able to load native libraries and to set heap size
 JAVA_OPTS="$OUR_JAVA_OPTS"\
 JAVA_OPTS="$JAVA_OPTS -Djava.library.path=$SPARK_LIBRARY_PATH"\
-JAVA_OPTS="$JAVA_OPTS -Xms$SPARK_MEM -Xmx$SPARK_MEM"\
+JAVA_OPTS="$JAVA_OPTS -Xms$SPARK_MEM -Xmx$SPARK_MEM"
 
 https://github.com/IBM/spark-tpc-ds-performance-test/issues/32
 
