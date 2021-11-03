@@ -8,6 +8,10 @@ sudo debugfs -R stats /dev/sa1 | grep Lifetime\
 https://github.com/opcm/pcm \
 echo 'READ WRITE IO ENERGY'; sudo pcm 1 -nc 2>&1 | egrep 'SKT   0'
 
+## Java Version
+
+sudo apt install openjdk-8-jdk -y
+
 ## Hadoop and Hive Instructions
 
 which hdfs dfsadmin -safemode leave\
