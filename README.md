@@ -61,7 +61,7 @@ export HADOOP_OPTS="-Xmx4096m"
 
 For the Java Out-of-Memory Bug. Set the Variables at /spark/bin/spark-class
 #### Set SPARK_MEM if it isn't already set since we also use it for this process
-SPARK_MEM=${SPARK_MEM:-512m}\
+SPARK_MEM=${SPARK_MEM:-2048m}\
 export SPARK_MEM
 
 #### Set JAVA_OPTS to be able to load native libraries and to set heap size
@@ -82,6 +82,13 @@ https://github.com/gregrahn/tpcds-kit
 
 Tool for TPC-DS queries\
 https://github.com/IBM/spark-tpc-ds-performance-test
+
+#### Machine requirements
+
+Node ID	pc821\
+Type	d430\
+Cores 8\
+
 
 
 
