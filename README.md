@@ -87,7 +87,7 @@ https://github.com/IBM/spark-tpc-ds-performance-test
 
 Node ID	pc821\
 Type	d430\
-Cores 8\
+Cores 8
 
 
 
