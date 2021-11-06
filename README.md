@@ -85,7 +85,7 @@ https://github.com/gregrahn/tpcds-kit
 Tool for TPC-DS queries\
 https://github.com/IBM/spark-tpc-ds-performance-test
 
-#### Machine requirements
+#### Machine requirements for TPC-DS queries
 
 Node ID	pc821\
 Type	d430\
