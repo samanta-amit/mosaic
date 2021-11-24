@@ -1,5 +1,23 @@
 # mosaic
 
+## Testing
+
+mkdir benchmark \
+cd benchmark \
+sysbench fileio prepare \
+sysbench fileio --file-test-mode=rndrw run \
+Write: dd if=/dev/zero of=/dev/null bs=1M count=1000000 \
+Read: sudo hdparm -tT /dev/sd \
+dd if=/dev/zero of=/dev/null bs=1M count=1000000 \
+sudo sh -c "sync && echo 3 > /proc/sys/vm/drop_caches" \
+dd if=/dev/zero of=benchfile bs=4k count=200000 && sync; rm benchfile \
+dd if=/dev/zero of=/dev/null && sync \
+dd if=/dev/zero of=./largefile bs=2M count=2000000 \
+sudo sh -c "sync && echo 3 > /proc/sys/vm/drop_caches" \
+dd if=./largefile of=/dev/null bs=4k 
+
+
+
 ## Debugging tool
 
 iotop -o -b -d 5\
