@@ -2,6 +2,7 @@
 
 ## Testing
 
+stream benchmark \
 mkdir benchmark \
 cd benchmark \
 sysbench fileio prepare \
