@@ -21,7 +21,8 @@ dd if=/dev/zero of=benchfile bs=4k count=200000 && sync; rm benchfile \
 dd if=/dev/zero of=/dev/null && sync \
 dd if=/dev/zero of=./largefile bs=2M count=2000000 \
 sudo sh -c "sync && echo 3 > /proc/sys/vm/drop_caches" \
-dd if=./largefile of=/dev/null bs=4k 
+dd if=./largefile of=/dev/null bs=4k \
+dmidecode --type memory
 
 
 
