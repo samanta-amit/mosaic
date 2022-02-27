@@ -1,6 +1,6 @@
 # mosaic
 
-## PM Server 
+## HPE PMEM Server 
 
 ```
 ssh samantam@daosserver.labs.hpecorp.net
