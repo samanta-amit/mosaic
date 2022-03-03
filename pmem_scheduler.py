@@ -122,7 +122,6 @@ class Request:
 		Request.count += 1
 		self.completion = time.time()
 		lcy = self.completion - self.arrival
-		print(lcy)
 		#logEvent("Finish", "User %d, %s.  E2ELatency = %s" % (self.workload.user_id, self, t_str(lcy)))
 		logEvent("Job completed count", Request.count)
 		Request.total_latency = Request.total_latency + lcy
@@ -277,7 +276,6 @@ class RequestGenerator:
 		return [(resource, request_size_generator(r)) for resource, request_size_generator in self.stages]
 
 
-
 class VirtualTimeConsumptionTracker:
 
 	def __init__(self, capacity):
@@ -292,10 +290,10 @@ class VirtualTimeConsumptionTracker:
 
 	def _advance_to_now(self):
 		if len(self.ongoing) == 0:
-			self.t = now()
+			self.t = time.time()
 			self.vt = 0
 		else:
-			cur_t = now()
+			cur_t = time.time()
 			self.vt += (cur_t - self.t) * (self.capacity / len(self.ongoing))
 			self.t = cur_t
 
@@ -318,7 +316,7 @@ class VirtualTimeConsumptionTracker:
 
 	def _check_completions_callback(self, iteration, callback_vt):
 		if self.iteration == iteration:
-			self.t = now()
+			self.t = time.time()
 			self.vt = callback_vt
 			self._check_for_completions()
 			self._schedule_next_completion()
