@@ -8,26 +8,24 @@ from random import randint
 import array as arr
 import numpy as geek 
 import subprocess
+import time
 
 # Implementation of event quque
 class EventQueue:
 
 	def __init__(self):
-		self.events = []                                                                  # Events associated with each operation for different jobs
+		self.events = []  # Events associated with each operation for different jobs
 		self.i = 0
 		self.t = 0.0
 
 	def schedule(self, delta_t, priority, callback):
-		delta_t += random.randint(1,8)*0.02                                                # Generate the time required to finish to any operation (i.e., CPU and GPU execution, network transfer and PCIE transfer)
-		heapq.heappush(self.events, (self.t + delta_t, priority, self.i, callback))        # Heap Quque
+		heapq.heappush(self.events, (self.t, priority, self.i, callback))  # Heap Quque
 		self.i += 1
 
 	def advance(self):
 		t, priority, i, callback = heapq.heappop(self.events)
 		self.t = t
 		return callback
-
-
 
 q = EventQueue()
 random_seed = 1
@@ -61,11 +59,11 @@ class Priority:
 class ClosedLoopWorkload:
 
 	def __init__(self, workload_id, request_generator, concurrency, admission_control):
-		self.workload_id = workload_id                                 # Workload ID 
+		self.workload_id = workload_id  # Workload ID 
 		self.request_generator = request_generator
 		self.random = RandomState(random_seed + workload_id)
 		self.admission_control = admission_control
-		for i in range(concurrency):                                   # Generate number of concurrent requets for each user
+		for i in range(concurrency):  # Generate number of concurrent requets for each user
 			self.start_next_request()
 
 	def start_next_request(self):
@@ -100,20 +98,18 @@ class Request:
 		self.arrival = None
 		self.completion = None
 
-	def begin(self):                                               # Tacking the arrival of a job
-		self.arrival = now()
-		#logEvent("Arrive", "User %d, %s: Worker %s: Model %s: %s" % (self.workload.user_id, self, self.workload.worker_id, self.workload.model_id, self.verbose_description()))
+	def begin(self):    # Tacking the arrival of a job
+		self.arrival = time.time()
 		self.admission_control.enqueue(self)
 
-	def admitted(self):                                            # Admitting a job
-		#logEvent("Admit", "User %d, %s: %s" % (self.workload.user_id, self, self.verbose_description()))
+	def admitted(self):   # Admitting a job
 		self.execute_next_stage();
 
 	def execute_next_stage(self):
 		self.pending_stages[0].execute()
 		subprocess.call(['sh', './test.sh'])
 
-	def stage_completed(self, stage):                             # Tracking the completion a job
+	def stage_completed(self, stage):  # Tracking the completion a job
 		self.completed_stages.append(self.pending_stages[0])
 		self.pending_stages = self.pending_stages[1:]
 		if len(self.pending_stages) == 0:
@@ -124,8 +120,9 @@ class Request:
 
 	def complete(self):
 		Request.count += 1
-		self.completion = now()		
+		self.completion = time.time()
 		lcy = self.completion - self.arrival
+		print(lcy)
 		#logEvent("Finish", "User %d, %s.  E2ELatency = %s" % (self.workload.user_id, self, t_str(lcy)))
 		logEvent("Job completed count", Request.count)
 		Request.total_latency = Request.total_latency + lcy
@@ -259,35 +256,6 @@ class ResourceStage:
 	def __str__(self):
 		return "%s, Task %d" % (self.request, self.stage_ix)
 
-
-# Basic module of Dominant Fair Queuing scheme (DFQS)
-class DominantFairQueuing:
-
-	def __init__(self, ):
-		print(" ")
-
-	def __dove_tailing(self):
-		print("Implementation of Dove Tailing")
-
-	def __virtual_time(self):
-		virtual_time = self.request.complete.now()
-		virtaul_finish_time = now()
-		request_id = 0
-		print("self.virtual_time", self.virtual_time)
-		virtual_start_time = max(self.virtual_time, self.virtaul_finish_time)
-		if request_id != 0:
-			virtual_time_function = max()
-		else:
-			virtual_time_function = 0
-		start_time = max(1, 2)
-		print("Implementation of Virtual Time", start_time)
-                end_time = start_time + max(1,2)
-                print("end_time", end_time)
-		start_frame = start_time
-		end_frame = end_time
-		avg_time = (start_frame + end_frame)/2
-
-
 # Request generator
 class RequestGenerator:
 
@@ -378,7 +346,7 @@ class Resource:
 		while self.count < self.concurrency and not self.queue.is_empty():
 			self.count += 1
 			next_execution = self.queue.dequeue()
-			next_execution.dequeue = now()
+			next_execution.dequeue = time.time()
 			qtime = next_execution.dequeue - next_execution.enqueue
 			#print("%s" % (next_execution.dequeue))
 			logEvent(self.name.upper(), "Dequeue %s: %s.  Queued for %s" % (next_execution, next_execution.verbose_description(), t_str(qtime)))
@@ -391,14 +359,14 @@ class Resource:
 
 
 	def enqueue(self, execution):                    # Enqueueing a job
-		execution.enqueue = now()
+		execution.enqueue = time.time()
 		logEvent(self.name.upper(), "Enqueue   %s: %s" % (execution, execution.verbose_description()))
 		self.queue.enqueue(execution)
 		self._schedule_exec_next()
 
 	def _on_execution_completed(self, execution):    # Execution of a job
 		#self.count -= 1
-		execution.completion = now()
+		execution.completion = time.time()
 		etime = execution.completion - execution.dequeue
 		logEvent(self.name.upper(), "Completed %s: %s.  Executed for %s" % (execution, execution.verbose_description(), t_str(etime)))
 		self.queue.completed(execution)
@@ -416,7 +384,7 @@ def concurrency_generator():
 function = Resource("resource", capacity = 1000000, queue = FIFOQueue(), concurrency=100)  
 admissionqueue = FIFOQueue()
 admissioncontrol = FixedConcurrencyAdmissionControl(1, admissionqueue)
-workload1generator = RequestGenerator().binomial(function, 10, 100)# Workload generator
+workload1generator = RequestGenerator().binomial(function, 10, 100)  # Workload generator
 workload1 = ClosedLoopWorkload(workload_id=1, request_generator=workload1generator, concurrency=concurrency_generator(), admission_control=admissioncontrol)
 
 total_time = 20 # Time-frame 
