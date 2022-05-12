@@ -24,7 +24,13 @@ sudo sh -c "sync && echo 3 > /proc/sys/vm/drop_caches" \
 dd if=./largefile of=/dev/null bs=4k \
 dmidecode --type memory
 
+## Python indentation
 
+autopep8 -i my_file.py
+
+## AWS Login Page
+
+https://federation-proxy.cloudbank.org/aws?account=281247964862
 
 ## Debugging tool
 
