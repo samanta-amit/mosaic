@@ -1,4 +1,14 @@
+<!--# mosaic
 
+## HPE PMEM Server
+
+```
+ssh samantam@daosserver.labs.hpecorp.net
+```
+
+## AWS Login Page
+
+https://federation-proxy.cloudbank.org/aws?account=281247964862-->
 
 ## Debugging tool
 
