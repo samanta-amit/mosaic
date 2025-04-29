@@ -1,10 +1,10 @@
 # mosaic
 
-## HPE PMEM Server 
+//## HPE PMEM Server 
 
-```
-ssh samantam@daosserver.labs.hpecorp.net
-```
+//```
+//ssh samantam@daosserver.labs.hpecorp.net
+//```
 
 ## AWS Login Page
 
